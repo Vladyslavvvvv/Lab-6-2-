@@ -20,6 +20,7 @@ public:
     void printMatrix() const;
     void copyMainDiagonal();
     void printMainDiagonal() const;
+    void fillUserValues();
 };
 
 template <class T>
@@ -105,6 +106,17 @@ void MatrixCopy<T>::printMainDiagonal() const {
     cout << '\n';
 }
 
+template <class T>
+void MatrixCopy<T>::fillUserValues() {
+    cout << "Enter matrix elements manually:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            cout << "Enter element at position (" << i + 1 << ", " << j + 1 << "): ";
+            cin >> matrix[i][j];
+        }
+    }
+}
+
 int main() {
     int rows, columns;
     cout << "Enter the number of rows and columns: ";
@@ -112,13 +124,7 @@ int main() {
 
     MatrixCopy<int> matrixCopy(rows, columns);
 
-    cout << "Enter matrix elements manually:\n";
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
-            cout << "Enter element at position (" << i + 1 << ", " << j + 1 << "): ";
-            cin >> matrixCopy[i][j];
-        }
-    }
+    matrixCopy.fillUserValues();
 
     cout << "Matrix:\n";
     matrixCopy.printMatrix();
