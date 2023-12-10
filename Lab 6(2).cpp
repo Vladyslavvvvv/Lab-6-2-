@@ -101,22 +101,10 @@ void MatrixCopy<T>::printMainDiagonal() const {
 
 template <class T>
 void MatrixCopy<T>::fillRandomValues(T minValue, T maxValue) {
-    T zeroValue = deduceDataType(minValue, maxValue);
-
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
-            matrix[i][j] = T(rand() % (maxValue - minValue + 1) + minValue);
+            matrix[i][j] = rand() % (maxValue - minValue + 1) + minValue;
         }
-    }
-}
-
-template <class T>
-T deduceDataType(T minValue, T maxValue) {
-    if (is_floating_point<T>::value) {
-        return T(0.0);
-    }
-    else if (is_integral<T>::value) {
-        return T(0);
     }
 }
 
@@ -125,7 +113,7 @@ int main() {
     cout << "Enter the number of rows and columns: ";
     cin >> rows >> columns;
 
-    MatrixCopy<decltype(deduceDataType(0, 0))> matrixCopy(rows, columns);
+    MatrixCopy<int> matrixCopy(rows, columns);
 
     int minValue, maxValue;
     cout << "Enter the minimum and maximum values for random filling: ";
