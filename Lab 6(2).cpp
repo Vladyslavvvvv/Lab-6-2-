@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-#include <ctime>
 #include <cstdlib>
 
 using namespace std;
@@ -18,10 +17,9 @@ public:
     void copyByColumns(int column);
     void copySelectedRow(int sourceRow, int destRow);
     void copySelectedColumn(int sourceColumn, int destColumn);
-    void copyMainDiagonal();
     void printMatrix() const;
+    void copyMainDiagonal();
     void printMainDiagonal() const;
-    void fillRandomValues(T minValue, T maxValue);
 };
 
 template <class T>
@@ -91,21 +89,20 @@ void MatrixCopy<T>::printMatrix() const {
 }
 
 template <class T>
+void MatrixCopy<T>::copyMainDiagonal() {
+    int minDim = min(rows, columns);
+    for (int i = 0; i < minDim; ++i) {
+        matrix[i][i] = matrix[i][i];
+    }
+}
+
+template <class T>
 void MatrixCopy<T>::printMainDiagonal() const {
     int minDim = min(rows, columns);
     for (int i = 0; i < minDim; ++i) {
         cout << matrix[i][i] << ' ';
     }
     cout << '\n';
-}
-
-template <class T>
-void MatrixCopy<T>::fillRandomValues(T minValue, T maxValue) {
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
-            matrix[i][j] = rand() % (maxValue - minValue + 1) + minValue;
-        }
-    }
 }
 
 int main() {
@@ -115,15 +112,16 @@ int main() {
 
     MatrixCopy<int> matrixCopy(rows, columns);
 
-    int minValue, maxValue;
-    cout << "Enter the minimum and maximum values for random filling: ";
-    cin >> minValue >> maxValue;
+    cout << "Enter matrix elements manually:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            cout << "Enter element at position (" << i + 1 << ", " << j + 1 << "): ";
+            cin >> matrixCopy[i][j];
+        }
+    }
 
-    matrixCopy.fillRandomValues(minValue, maxValue);
-
-    cout << "Generated Matrix:\n";
+    cout << "Matrix:\n";
     matrixCopy.printMatrix();
-    cout << "-----------------\n";
 
     int choice;
     cout << "Choose operation:\n";
@@ -169,10 +167,8 @@ int main() {
         break;
     }
 
-    if (choice != 5) {
-        cout << "Result Matrix:\n";
-        matrixCopy.printMatrix();
-    }
+    cout << "Result Matrix:\n";
+    matrixCopy.printMatrix();
 
     return 0;
 }
