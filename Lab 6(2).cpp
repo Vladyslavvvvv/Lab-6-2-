@@ -101,9 +101,11 @@ void MatrixCopy<T>::printMainDiagonal() const {
 
 template <class T>
 void MatrixCopy<T>::fillRandomValues(T minValue, T maxValue) {
+    T zeroValue = deduceDataType(minValue, maxValue);
+
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
-            matrix[i][j] = rand() % (maxValue - minValue + 1) + minValue;
+            matrix[i][j] = T(rand() % (maxValue - minValue + 1) + minValue);
         }
     }
 }
