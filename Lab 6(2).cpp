@@ -135,35 +135,40 @@ int main() {
     cin >> choice;
 
     switch (choice) {
-    case 1:
+    case 1: {
         int rowToCopy;
         cout << "Enter the row to copy: ";
         cin >> rowToCopy;
         matrixCopy.copyByRows(rowToCopy);
         break;
-    case 2:
+    }
+    case 2: {
         int colToCopy;
         cout << "Enter the column to copy: ";
         cin >> colToCopy;
         matrixCopy.copyByColumns(colToCopy);
         break;
-    case 3:
+    }
+    case 3: {
         int sourceRow, destRow;
         cout << "Enter the source and destination rows: ";
         cin >> sourceRow >> destRow;
         matrixCopy.copySelectedRow(sourceRow, destRow);
         break;
-    case 4:
+    }
+    case 4: {
         int sourceCol, destCol;
         cout << "Enter the source and destination columns: ";
         cin >> sourceCol >> destCol;
         matrixCopy.copySelectedColumn(sourceCol, destCol);
         break;
-    case 5:
+    }
+    case 5: {
         matrixCopy.copyMainDiagonal();
         cout << "Main Diagonal:\n";
         matrixCopy.printMainDiagonal();
         break;
+    }
     default:
         cout << "Invalid choice\n";
         break;
