@@ -21,7 +21,7 @@ public:
     void copyMainDiagonal();
     void printMatrix() const;
     void printMainDiagonal() const;
-    void fillRandomValues(int minValue, int maxValue);
+    void fillRandomValues(T minValue, T maxValue);
 };
 
 template <class T>
@@ -92,7 +92,7 @@ void MatrixCopy<T>::printMatrix() const {
 
 template <class T>
 void MatrixCopy<T>::printMainDiagonal() const {
-    int minDim = std::min(rows, columns);
+    int minDim = min(rows, columns);
     for (int i = 0; i < minDim; ++i) {
         cout << matrix[i][i] << ' ';
     }
@@ -100,7 +100,7 @@ void MatrixCopy<T>::printMainDiagonal() const {
 }
 
 template <class T>
-void MatrixCopy<T>::fillRandomValues(int minValue, int maxValue) {
+void MatrixCopy<T>::fillRandomValues(T minValue, T maxValue) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
             matrix[i][j] = rand() % (maxValue - minValue + 1) + minValue;
