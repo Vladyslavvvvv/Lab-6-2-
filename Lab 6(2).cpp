@@ -122,12 +122,15 @@ int main() {
     cout << "Enter the number of rows and columns: ";
     cin >> rows >> columns;
 
-    MatrixCopy<int> matrixCopy(rows, columns);
+    MatrixCopy<int> intMatrix(rows, columns);
+    intMatrix.fillUserValues();
+    cout << "Int Matrix:\n";
+    intMatrix.printMatrix();
 
-    matrixCopy.fillUserValues();
-
-    cout << "Matrix:\n";
-    matrixCopy.printMatrix();
+    MatrixCopy<double> doubleMatrix(rows, columns);
+    doubleMatrix.fillUserValues();
+    cout << "Double Matrix:\n";
+    doubleMatrix.printMatrix();
 
     int choice;
     cout << "Choose operation:\n";
