@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <cstdlib>
+#include <algorithm>
 
 using namespace std;
 
@@ -90,14 +91,6 @@ void MatrixCopy<T>::printMatrix() const {
 }
 
 template <class T>
-void MatrixCopy<T>::copyMainDiagonal() {
-    int minDim = min(rows, columns);
-    for (int i = 0; i < minDim; ++i) {
-        matrix[i][i] = matrix[i][i];
-    }
-}
-
-template <class T>
 void MatrixCopy<T>::printMainDiagonal() const {
     int minDim = min(rows, columns);
     for (int i = 0; i < minDim; ++i) {
@@ -117,20 +110,16 @@ void MatrixCopy<T>::fillUserValues() {
     }
 }
 
-int main() {
+template <class T>
+void performMatrixOperations() {
     int rows, columns;
     cout << "Enter the number of rows and columns: ";
     cin >> rows >> columns;
 
-    MatrixCopy<int> intMatrix(rows, columns);
-    intMatrix.fillUserValues();
-    cout << "Int Matrix:\n";
-    intMatrix.printMatrix();
-
-    MatrixCopy<double> doubleMatrix(rows, columns);
-    doubleMatrix.fillUserValues();
-    cout << "Double Matrix:\n";
-    doubleMatrix.printMatrix();
+    MatrixCopy<T> matrix(rows, columns);
+    matrix.fillUserValues();
+    cout << "Matrix:\n";
+    matrix.printMatrix();
 
     int choice;
     cout << "Choose operation:\n";
@@ -146,30 +135,30 @@ int main() {
         int rowToCopy;
         cout << "Enter the row to copy: ";
         cin >> rowToCopy;
-        matrixCopy.copyByRows(rowToCopy);
+        matrix.copyByRows(rowToCopy);
         break;
     case 2:
         int colToCopy;
         cout << "Enter the column to copy: ";
         cin >> colToCopy;
-        matrixCopy.copyByColumns(colToCopy);
+        matrix.copyByColumns(colToCopy);
         break;
     case 3:
         int sourceRow, destRow;
         cout << "Enter the source and destination rows: ";
         cin >> sourceRow >> destRow;
-        matrixCopy.copySelectedRow(sourceRow, destRow);
+        matrix.copySelectedRow(sourceRow, destRow);
         break;
     case 4:
         int sourceCol, destCol;
         cout << "Enter the source and destination columns: ";
         cin >> sourceCol >> destCol;
-        matrixCopy.copySelectedColumn(sourceCol, destCol);
+        matrix.copySelectedColumn(sourceCol, destCol);
         break;
     case 5:
-        matrixCopy.copyMainDiagonal();
+        matrix.copyMainDiagonal();
         cout << "Main Diagonal:\n";
-        matrixCopy.printMainDiagonal();
+        matrix.printMainDiagonal();
         break;
     default:
         cout << "Invalid choice\n";
@@ -177,7 +166,27 @@ int main() {
     }
 
     cout << "Result Matrix:\n";
-    matrixCopy.printMatrix();
+    matrix.printMatrix();
+}
+
+int main() {
+    int dataTypeChoice;
+    cout << "Choose data type:\n";
+    cout << "1. int\n";
+    cout << "2. double\n";
+    cin >> dataTypeChoice;
+
+    switch (dataTypeChoice) {
+    case 1:
+        performMatrixOperations<int>();
+        break;
+    case 2:
+        performMatrixOperations<double>();
+        break;
+    default:
+        cout << "Invalid choice\n";
+        break;
+    }
 
     return 0;
 }
